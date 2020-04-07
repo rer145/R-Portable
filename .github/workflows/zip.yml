@@ -53,7 +53,7 @@ jobs:
           upload_url: ${{steps.create_release.outputs.upload_url}}
           asset_path: ./R-Portable-Win.zip
           asset_name: R-Portable-Win.zip
-        asset_content_type: application/x-msdownload
+          asset_content_type: application/x-msdownload
 
       - name: Upload Mac asset
         uses: actions/upload-release-asset@v1.0.1

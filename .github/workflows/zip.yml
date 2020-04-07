@@ -65,12 +65,12 @@ jobs:
           asset_name: R-Portable-Mac.zip
           asset_content_type: application/octet-stream
 
-    - name: Upload Checksums
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      with: 
-        upload_url: ${{steps.create_release.outputs.upload_url}}
-        asset_path: ./SHA256SUMS.txt
-        asset_name: SHA256SUMS.txt
-        asset_content_type: text/plain
+      - name: Upload Checksums
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with: 
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: ./SHA256SUMS.txt
+          asset_name: SHA256SUMS.txt
+          asset_content_type: text/plain

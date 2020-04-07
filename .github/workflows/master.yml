@@ -1,0 +1,76 @@
+name: Zip and Release
+
+on:
+	watch:
+		types: [started]
+
+jobs:
+	build:
+		runs-on: ubuntu-latest
+
+		if: github.actor == github.event.repository.owner.login
+
+		steps:
+			- name: Checkout Repository
+			  uses: actions/checkout@v2
+
+			- name: Read package version
+			  id: pkg
+			  uses: juliangruber/read-file-action@v1
+			  with: 
+				path: ./version.txt
+
+			- name: Zip Windows
+			  run: zip -r R-Portable-Win.zip ./R-Portable-Win
+
+			- name: Generate Windows SHA256 checksum
+			  run: |
+				sha256sum "R-Portable-Win.zip" > "SHA256SUMS.txt"
+
+			- name: Zip Mac
+			  run: zip -r R-Portable-Mac.zip ./R-Portable-Mac
+
+			- name: Generate Mac SHA256 checksum
+			  run: |
+				sha256sum "R-Portable-Mac.zip" > "SHA256SUMS.txt"
+
+			- name: Draft GitHub Release 
+			  id: create_release
+			  uses: actions/create-release@v1
+			  env:
+				GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+			  with: 
+				tag_name: v${{steps.pkg.outputs.content}}
+				release_name: ${{steps.pkg.outputs.content}}
+				body: Fill in the changelog now...
+				draft: true
+
+			- name: Upload Windows asset
+			  uses: actions/upload-release-asset@v1.0.1
+			  env:
+				GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+			  with: 
+				upload_url: ${{steps.create_release.outputs.upload_url}}
+				asset_path: ./R-Portable-Win.zip
+				asset_name: R-Portable-Win.zip
+				asset_content_type: application/x-msdownload
+
+			- name: Upload Mac asset
+			  uses: actions/upload-release-asset@v1.0.1
+			  env:
+			    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+			  with: 
+			    upload_url: ${{steps.create_release.outputs.upload_url}}
+			    asset_path: ./R-Portable-Mac.zip
+			    asset_name: R-Portable-Mac.zip
+				asset_content_type: application/octet-stream
+				
+			- name: Upload Checksums
+			  uses: actions/upload-release-asset@v1.0.1
+			  env:
+				GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+			  with: 
+				upload_url: ${{steps.create_release.outputs.upload_url}}
+			    asset_path: ./SHA256SUMS.txt
+			    asset_name: SHA256SUMS.txt
+				asset_content_type: text/plain

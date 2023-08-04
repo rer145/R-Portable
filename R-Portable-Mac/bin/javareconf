@@ -9,7 +9,7 @@ fi
 DYLIB_EXT=`${R_HOME}/bin/R CMD config DYLIB_EXT`
 tools_classpath=${R_SHARE_DIR}/java
 
-revision='$Rev: 74361 $'
+revision='$Rev: 84174 $'
 version=`set - ${revision}; echo ${2}`
 version="R Java configurator: ${R_VERSION} (r${version})
 
@@ -191,9 +191,9 @@ if test -z "$JAR"; then
 fi
 echo "Java archive tool: ${JAR}"
 
-: ${JAVA_LIBS=~autodetect~}
-: ${JAVA_CPPFLAGS=~autodetect~}
-: ${JAVA_LD_LIBRARY_PATH=~autodetect~}
+: ${JAVA_LIBS='~autodetect~'}
+: ${JAVA_CPPFLAGS='~autodetect~'}
+: ${JAVA_LD_LIBRARY_PATH='~autodetect~'}
 custom_JAVA_LIBS="${JAVA_LIBS}"
 custom_JAVA_CPPFLAGS="${JAVA_CPPFLAGS}"
 custom_JAVA_LD_LIBRARY_PATH="${JAVA_LD_LIBRARY_PATH}"
@@ -204,7 +204,7 @@ custom_JAVA_LD_LIBRARY_PATH="${JAVA_LD_LIBRARY_PATH}"
 ## we now look for a path to put in R_LD_LIBRARY_PATH which will
 ## enable libjvm to be found at run time.  This should not be needed,
 ## but it seems that libjvm is often not in the ld.so cache.
-if test "${JAVA_LIBS}" = "~autodetect~"; then
+if test "${JAVA_LIBS}" = '~autodetect~'; then
 	## we need to reset LD_LIBRARY_PATH, because Java automatically
 	## adds all LD_LIBRARY_PATH to Java path
 	save_LDLP=${LD_LIBRARY_PATH}
@@ -238,9 +238,9 @@ if test "${JAVA_LIBS}" = "~autodetect~"; then
 	IFS=${save_IFS}
 	# replace occurrences of JAVA_HOME with $(JAVA_HOME)
 	# If JAVA_HOME was a link, it will be the canonical path we
-	# want to replace.  We need realpath to determine what that is.
-	if test "false" != "false"; then
-             java_home=`false "${JAVA_HOME}"`
+	# want to replace.  We need working realpath to determine what that is.
+	if /bin/realpath "${JAVA_HOME}" >/dev/null 2>&1; then
+            java_home=`/bin/realpath "${JAVA_HOME}"`
 	else
        	    java_home="${JAVA_HOME}"
 	fi
@@ -267,7 +267,7 @@ if test "${JAVA_LIBS}" = "~autodetect~"; then
            jmdinc=''
            jmdirs=''
 	   ## we are not in configure, so we need to find the OS from R
-	   host_os=`echo 'cat(R.version$os)'|${R_HOME}/bin/R --vanilla --slave 2>/dev/null`
+	   host_os=`echo 'cat(R.version$os)'|${R_HOME}/bin/R --vanilla --no-echo 2>/dev/null`
            ## put the most probable locations for each system in the first place
            case "${host_os}" in
              darwin*)  jmdirs=darwin;;
@@ -354,7 +354,7 @@ if test $ac_status != 0; then
 fi
 
 rm -f conftest.c conftest.o conftest.so Makevars
-cd ${wd}
+cd "${wd}"
 rm -Rf "${tempdir}"
 
 

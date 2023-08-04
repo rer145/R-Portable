@@ -119,7 +119,7 @@ summary( fm4Pixel )
 # 1.6  A Split-Plot Experiment
 
 fm1Oats <- lme( yield ~ ordered(nitro) * Variety, data = Oats,
-  random = ~ 1 | Block/Variety )
+               random = ~ 1 | Block/Variety )
 anova( fm1Oats )
 fm2Oats <- update( fm1Oats, yield ~ ordered(nitro) + Variety )
 anova( fm2Oats )
@@ -136,6 +136,5 @@ plot(augPred(fm4Oats), aspect = 2.5, layout = c(6, 3),
 
 # cleanup
 
-proc.time()
-
+summary(warnings())
 

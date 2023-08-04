@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-2016 The R Core Team.
+ *  Copyright (C) 2001-2020 The R Core Team.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -39,7 +39,7 @@
   The signature of the C routine that a callback must implement.
   expr - the expression for the top-level task that was evaluated.
   value - the result of the top-level task, i.e. evaluating expr.
-  succeeded - a logical value indicating whether the task completed propertly.
+  succeeded - a logical value indicating whether the task completed properly.
   visible - a logical value indicating whether the result was printed to the R ``console''/stdout.
   data - user-level data passed to the registration routine.
  */
@@ -73,11 +73,10 @@ R_ToplevelCallbackEl* Rf_addTaskCallback(R_ToplevelCallback cb, void *data, void
 /*
   The following definitions are for callbacks to R functions and
   methods related to user-level tables.  This was implemented in a
-  separate package on Omegahat and these declarations allow the package
-  to interface to the internal R code.
+  separate package formerly available from Omegahat and these
+  declarations allow the package to interface to the internal R code.
   
-  See https://developer.r-project.org/RObjectTables.pdf,
-  http://www.omegahat.net/RObjectTables/
+  See https://developer.r-project.org/RObjectTables.pdf.
 */
 
 typedef struct  _R_ObjectTable R_ObjectTable;

@@ -1,6 +1,6 @@
 #! /bin/sh
-# Generated automatically by config.status (R) 3.6.2
-# Libtool was configured on host hagal.research.att.com:
+# Generated automatically by config.status (R) 4.3.1
+# Libtool was configured on host ipyr:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 
 # Provide generalized library-building support services.
@@ -67,13 +67,13 @@ PATH_SEPARATOR=":"
 
 # The host system.
 host_alias=
-host=x86_64-apple-darwin15.6.0
-host_os=darwin15.6.0
+host=x86_64-apple-darwin20
+host_os=darwin20
 
 # The build system.
-build_alias=
-build=x86_64-apple-darwin15.6.0
-build_os=darwin15.6.0
+build_alias=x86_64-apple-darwin20
+build=x86_64-apple-darwin20
+build_os=darwin20
 
 # A sed program that does not truncate output.
 SED="/usr/bin/sed"
@@ -97,7 +97,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=196608
+max_cmd_len=786432
 
 # Object file suffix (normally "o").
 objext=o
@@ -121,7 +121,7 @@ to_host_file_cmd=func_convert_file_noop
 to_tool_file_cmd=func_convert_file_noop
 
 # An object symbol dumper.
-OBJDUMP="false"
+OBJDUMP="objdump"
 
 # Method to check whether dependent libraries are shared objects.
 deplibs_check_method="pass_all"
@@ -162,31 +162,31 @@ old_postuninstall_cmds=""
 lock_old_archive_extraction=yes
 
 # A C compiler.
-LTCC="clang"
+LTCC="clang -arch x86_64"
 
 # LTCC compiler flags.
-LTCFLAGS="-Wall -g -O2"
+LTCFLAGS="-falign-functions=64 -Wall -g -O2"
 
 # Take the output of nm and produce a listing of raw symbols and C names.
-global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([BCDEGRST][BCDEGRST]*\\)[	 ][	 ]*_\\([_A-Za-z][_A-Za-z0-9]*\\)\$/\\1 _\\2 \\2/p' | sed '/ __gnu_lto/d'"
+global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*_\\([_A-Za-z][_A-Za-z0-9]*\\)\$/\\1 _\\2 \\2/p' | sed '/ __gnu_lto/d'"
 
 # Transform the output of nm in a proper C declaration.
-global_symbol_to_cdecl="sed -n -e 's/^T .* \\(.*\\)\$/extern int \\1();/p' -e 's/^[BCDEGRST][BCDEGRST]* .* \\(.*\\)\$/extern char \\1;/p'"
+global_symbol_to_cdecl="sed -n -e 's/^T .* \\(.*\\)\$/extern int \\1();/p' -e 's/^[ABCDGIRSTW][ABCDGIRSTW]* .* \\(.*\\)\$/extern char \\1;/p'"
 
 # Transform the output of nm into a list of symbols to manually relocate.
 global_symbol_to_import=""
 
 # Transform the output of nm in a C name address pair.
-global_symbol_to_c_name_address="sed -n -e 's/^: \\(.*\\) .*\$/  {\"\\1\", (void *) 0},/p' -e 's/^[BCDEGRST][BCDEGRST]* .* \\(.*\\)\$/  {\"\\1\", (void *) \\&\\1},/p'"
+global_symbol_to_c_name_address="sed -n -e 's/^: \\(.*\\) .*\$/  {\"\\1\", (void *) 0},/p' -e 's/^[ABCDGIRSTW][ABCDGIRSTW]* .* \\(.*\\)\$/  {\"\\1\", (void *) \\&\\1},/p'"
 
 # Transform the output of nm in a C name address pair when lib prefix is needed.
-global_symbol_to_c_name_address_lib_prefix="sed -n -e 's/^: \\(.*\\) .*\$/  {\"\\1\", (void *) 0},/p' -e 's/^[BCDEGRST][BCDEGRST]* .* \\(lib.*\\)\$/  {\"\\1\", (void *) \\&\\1},/p' -e 's/^[BCDEGRST][BCDEGRST]* .* \\(.*\\)\$/  {\"lib\\1\", (void *) \\&\\1},/p'"
+global_symbol_to_c_name_address_lib_prefix="sed -n -e 's/^: \\(.*\\) .*\$/  {\"\\1\", (void *) 0},/p' -e 's/^[ABCDGIRSTW][ABCDGIRSTW]* .* \\(lib.*\\)\$/  {\"\\1\", (void *) \\&\\1},/p' -e 's/^[ABCDGIRSTW][ABCDGIRSTW]* .* \\(.*\\)\$/  {\"lib\\1\", (void *) \\&\\1},/p'"
 
 # The name lister interface.
 nm_interface="BSD nm"
 
 # Specify filename containing input files for $NM.
-nm_file_list_spec=""
+nm_file_list_spec="@"
 
 # The root where to search for dependent libraries,and where our libraries should be installed.
 lt_sysroot=
@@ -282,7 +282,7 @@ finish_eval=""
 hardcode_into_libs=no
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/usr/local/clang+llvm-7.0.0-x86_64-apple-darwin/lib/clang/7.0.0  /usr/local/lib"
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3  /usr/local/lib"
 
 # Detected run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"
@@ -305,7 +305,7 @@ striplib="strip -x"
 
 
 # The linker used to build libraries.
-LD="/usr/bin/ld"
+LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -315,7 +315,7 @@ reload_cmds="\$LTCC \$LTCFLAGS -nostdlib \$wl-r -o \$output\$reload_objs"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$tool_oldlib"
 
 # A language specific compiler.
-CC="clang"
+CC="clang -arch x86_64"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes
@@ -369,7 +369,7 @@ module_expsym_cmds="sed -e 's|^|_|' < \$export_symbols > \$output_objdir/\$libna
 with_gnu_ld="no"
 
 # Flag that allows shared libraries with undefined symbols to be built.
-allow_undefined_flag="\$wl-undefined \${wl}dynamic_lookup"
+allow_undefined_flag=""
 
 # Flag that enforces no undefined symbols.
 no_undefined_flag=""
@@ -11658,7 +11658,7 @@ build_old_libs=`case $build_libtool_libs in yes) echo no;; *) echo yes;; esac`
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
 # The linker used to build libraries.
-LD="/usr/bin/ld"
+LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -11668,7 +11668,7 @@ reload_cmds="\$LTCC \$LTCFLAGS -nostdlib \$wl-r -o \$output\$reload_objs"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$tool_oldlib"
 
 # A language specific compiler.
-CC="clang++"
+CC="clang++ -arch x86_64"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes
@@ -11722,7 +11722,7 @@ module_expsym_cmds="sed -e 's|^|_|' < \$export_symbols > \$output_objdir/\$libna
 with_gnu_ld="no"
 
 # Flag that allows shared libraries with undefined symbols to be built.
-allow_undefined_flag="\$wl-undefined \${wl}dynamic_lookup"
+allow_undefined_flag=""
 
 # Flag that enforces no undefined symbols.
 no_undefined_flag=""
@@ -11807,7 +11807,7 @@ compiler_lib_search_path=""
 # ### BEGIN LIBTOOL TAG CONFIG: FC
 
 # The linker used to build libraries.
-LD="/usr/bin/ld"
+LD="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -11817,7 +11817,7 @@ reload_cmds="\$LTCC \$LTCFLAGS -nostdlib \$wl-r -o \$output\$reload_objs"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$tool_oldlib"
 
 # A language specific compiler.
-CC="gfortran"
+CC="gfortran -arch x86_64"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes
@@ -11871,7 +11871,7 @@ module_expsym_cmds="sed -e 's|^|_|' < \$export_symbols > \$output_objdir/\$libna
 with_gnu_ld="no"
 
 # Flag that allows shared libraries with undefined symbols to be built.
-allow_undefined_flag="\$wl-undefined \${wl}dynamic_lookup"
+allow_undefined_flag=""
 
 # Flag that enforces no undefined symbols.
 no_undefined_flag=""

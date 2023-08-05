@@ -1,11 +1,11 @@
 #
 # ${R_HOME}/bin/BATCH
 
-revision='$Rev: 74000 $'
+revision='$Rev: 83927 $'
 version=`set - ${revision}; echo ${2}`
 version="R batch front end: ${R_VERSION} (r${version})
 
-Copyright (C) 2000--2018 The R Core Team.
+Copyright (C) 2000-2023 The R Core Team.
 This is free software; see the GNU General Public License version 2
 or later for copying conditions.  There is NO warranty."
 
@@ -54,7 +54,7 @@ if test -z "${timing}"; then
   export R_BATCH
 fi
 ## this used to set options(echo=TRUE), but that is the default
-## except for --slave, and why inhibit the latter?
+## except for --no-echo, and why inhibit the latter?
 
 ## need to put -f first in case user does --args
 ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} >${out} 2>&1

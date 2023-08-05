@@ -2,7 +2,8 @@
 
 Extracted, portable versions of R to use on Windows and Mac machines.
 
-Current version: 3.6.2
+- Current Windows Version: 3.6.2
+- Current Mac Version: 4.3.1
 
 ## Rtools
 

@@ -5,10 +5,12 @@
 ## Shell script wrapper for all R CMD commands.
 ## For internal use only.
 
+test ${#} -eq 0 && exec "${R_HOME}/bin/R" --help
+
 R_CMD="${R_HOME}/bin/Rcmd"
 export R_CMD
 
-R_VERSION=3.6.2
+R_VERSION=4.3.1
 export R_VERSION
 
 R_OSTYPE="unix"

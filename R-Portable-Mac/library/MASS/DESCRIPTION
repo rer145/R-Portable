@@ -1,9 +1,9 @@
 Package: MASS
 Priority: recommended
-Version: 7.3-51.4
-Date: 2019-03-31
-Revision: $Rev: 3496 $
-Depends: R (>= 3.1.0), grDevices, graphics, stats, utils
+Version: 7.3-60
+Date: 2023-05-02
+Revision: $Rev: 3621 $
+Depends: R (>= 4.0), grDevices, graphics, stats, utils
 Imports: methods
 Suggests: lattice, nlme, nnet, survival
 Authors@R: c(person("Brian", "Ripley", role = c("aut", "cre", "cph"),
@@ -24,7 +24,7 @@ License: GPL-2 | GPL-3
 URL: http://www.stats.ox.ac.uk/pub/MASS4/
 Contact: <MASS@stats.ox.ac.uk>
 NeedsCompilation: yes
-Packaged: 2019-03-31 07:00:08 UTC; ripley
+Packaged: 2023-05-02 16:42:41 UTC; ripley
 Author: Brian Ripley [aut, cre, cph],
   Bill Venables [ctb],
   Douglas M. Bates [ctb],
@@ -33,5 +33,5 @@ Author: Brian Ripley [aut, cre, cph],
   David Firth [ctb]
 Maintainer: Brian Ripley <ripley@stats.ox.ac.uk>
 Repository: CRAN
-Date/Publication: 2019-03-31 07:55:05 UTC
-Built: R 3.6.2; x86_64-apple-darwin15.6.0; 2019-12-12 18:45:32 UTC; unix
+Date/Publication: 2023-05-04 07:32:21 UTC
+Built: R 4.3.1; x86_64-apple-darwin20; 2023-06-16 21:52:49 UTC; unix

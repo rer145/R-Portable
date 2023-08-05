@@ -15,11 +15,13 @@
 #define SUPPORT_MBCS 1
 #define ENABLE_NLS 1
 #define HAVE_AQUA 1
-/* Will enable the use of Fortran character lengths,
+/* Enable the use of Fortran character lengths,
    e.g. in BLAS.h and Lapack.h */
-#ifdef USE_FC_LEN_T
+#ifndef DONT_USE_FC_LEN_T
 #define FC_LEN_T size_t
 #endif
+
+#define PR18534fixed 1
 
 /* NB: the rest are for the C compiler used to build R:
    they do not necessarily apply to a C++ compiler */

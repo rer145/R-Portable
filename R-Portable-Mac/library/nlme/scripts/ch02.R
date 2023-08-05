@@ -64,5 +64,5 @@ anova( fm2Machine )
 
 # cleanup
 
-proc.time()
+summary(warnings())
 

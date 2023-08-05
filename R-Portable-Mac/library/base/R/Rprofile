@@ -2,7 +2,7 @@
 ### Additional commands can be placed in site or user Rprofile files
 ### (see ?Rprofile).
 
-### Copyright (C) 1995-2015 The R Core Team
+### Copyright (C) 1995-2022 The R Core Team
 
 ### Notice that it is a bad idea to use this file as a template for
 ### personal startup files, since things will be executed twice and in
@@ -28,15 +28,19 @@ options(warn = 0)
 # options(repos = c(CRAN="@CRAN@"))
 # options(BIOC = "http://www.bioconductor.org")
 
-options(timeout = 60)
+## setting from an env variable added in 4.0.2
+local({to <- as.integer(Sys.getenv("R_DEFAULT_INTERNET_TIMEOUT", 60))
+    if (is.na(to) || to <= 0) to <- 60L
+    options(timeout = to)
+})
 options(encoding = "native.enc")
 options(show.error.messages = TRUE)
 ## keep in sync with PrintDefaults() in  ../../main/print.c :
 options(scipen = 0)
 options(max.print = 99999)# max. #{entries} in internal printMatrix()
 options(add.smooth = TRUE)# currently only used in 'plot.lm'
-options(stringsAsFactors = TRUE)
-if(!interactive() && is.null(getOption("showErrorCalls")))
+
+if(!interactive())
     options(showErrorCalls = TRUE)
 
 local({dp <- Sys.getenv("R_DEFAULT_PACKAGES")
@@ -99,16 +103,45 @@ local({
     if(nzchar(rv <- Sys.getenv("_R_RNG_VERSION_")))
         suppressWarnings(RNGversion(rv))
 })
+
+.sys.timezone <- NA_character_
+
+local({
+    ## create an active binding for .Library.site, so that it can be
+    ## modified after the base environment is locked
+
+    ## remove the binding in the lazyload data base 
+    .Internal(mkUnbound(as.name(".Library.site")))
+    siteLibrary <- character()
+    slfun <- function(v) {
+        if (!missing(v))
+            siteLibrary <<- v
+        siteLibrary
+    }
+
+    makeActiveBinding(".Library.site", slfun, baseenv())
+
+    ## make .Library.site accessible also from global environment to
+    ## preserve functionality of site profiles assigning to it directly
+    ## (originally, site profiles were run in base environment)
+
+    makeActiveBinding(".Library.site", slfun, globalenv())
+})
 ###-*- R -*- Unix Specific ----
 
 .Library <- file.path(R.home(), "library")
-.Library.site <- Sys.getenv("R_LIBS_SITE")
-.Library.site <- if(!nchar(.Library.site)) file.path(R.home(), "site-library") else unlist(strsplit(.Library.site, ":"))
-.Library.site <- .Library.site[file.exists(.Library.site)]
+.Library.site <- Sys.getenv("R_LIBS_SITE") # This is set in Renviron.
+.Library.site <-
+    if(.Library.site == "NULL") character() else unlist(strsplit(.Library.site, ":"))
+.Library.site <- .Library.site[dir.exists(.Library.site)]
 
-invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")),
-                      unlist(strsplit(Sys.getenv("R_LIBS_USER"), ":")
-                      ))))
+local({
+    libs <- Sys.getenv("R_LIBS_USER") # This is set in Renviron.
+    libs <- if(libs == "NULL") character() else unlist(strsplit(libs, ":"))
+    ## .libPaths filters on existence.
+    invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")),
+                          libs)))
+})
 local({
     popath <- Sys.getenv("R_TRANSLATIONS", "")
     if(!nzchar(popath)) {

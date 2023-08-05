@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2019-02-28 r76174) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-12-19 r77606) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -110,8 +110,10 @@ Type 'q()' to quit R.
 +      sum(y[gp1, 1] * w[gp1]) - sum(y[-gp1, 1] * w[-gp1])
 + }
 > grav1 <- gravity[as.numeric(gravity[, 2]) >= 7, ]
+> ## IGNORE_RDIFF_BEGIN
 > abc.ci(grav1, mean.diff, strata = grav1$series)
 [1]  0.95000 -6.70758 -0.39394
+> ## IGNORE_RDIFF_END
 > ## Don't show: 
 > options(op)
 > ## End(Don't show)
@@ -1994,7 +1996,7 @@ t3* 0.000000 -0.7305799    2.152173
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  47.887 0.375 118.99 0 0 
+Time elapsed:  44.104 0.665 45.086 0 0 
 > grDevices::dev.off()
 null device 
           1 

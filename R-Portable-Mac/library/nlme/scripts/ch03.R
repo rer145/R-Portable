@@ -111,6 +111,5 @@ Quinidine[Quinidine[["Subject"]] == 4, ]
 
 # cleanup
 
-proc.time()
-
+summary(warnings())
 

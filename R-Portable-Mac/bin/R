@@ -2,11 +2,11 @@
 # Shell wrapper for R executable.
 
 # R_HOME_DIR=/Library/Frameworks/R.framework/Resources
-path=$(pwd)
+path=$(dirname "$0") # correct direct so that it won't get an error running in Terminal by just clicking it
 last_dir="${path##*/}"  # sets last_dir to 'to' (equivalent of basename)
-echo ${path}
+# echo ${path}
 if [ "${last_dir}" = "bin" ]; then 
-  R_HOME_DIR=$(dirname $(pwd))
+  R_HOME_DIR=$(dirname ${path})
 else
   R_HOME_DIR=${path}
 fi
@@ -46,9 +46,9 @@ if test -n "${R_HOME}" && \
 fi
 R_HOME="${R_HOME_DIR}"
 export R_HOME
-#R_SHARE_DIR=/Library/Frameworks/R.framework/Resources/share
+R_SHARE_DIR=${R_HOME_DIR}/share
 export R_SHARE_DIR
-#R_INCLUDE_DIR=/Library/Frameworks/R.framework/Resources/include
+R_INCLUDE_DIR=${R_HOME_DIR}/include
 export R_INCLUDE_DIR
 R_DOC_DIR=${R_HOME_DIR}/doc
 export R_DOC_DIR
